@@ -1,13 +1,15 @@
 //Require Mongoose
 var mongoose = require('mongoose');
 
-//Define a schema
-var Schema = mongoose.Schema;
 
-var UserModelSchema = new Schema({
-    
-
-
+var userModel = new mongoose.Schema({
+    firstName: String,
+    lastName: String,
+    email: String,
+    password: String,
+    pseudo: String,
+    createdAt: Date
 
 });
 
+module.exports = mongoose.model('User', userModel)
