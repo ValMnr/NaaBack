@@ -8,6 +8,7 @@ var profileHumorModel = new mongoose.Schema({
     level: Number,
     causes: String[]
     
+    
 });
 
 module.exports = mongoose.model('ProfileHumor',profileHumorModel)
