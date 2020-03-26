@@ -11,7 +11,6 @@ var profilePsyModel = new mongoose.Schema({
     risque: Number
 
     createdAt: Date
-
     
 });
 

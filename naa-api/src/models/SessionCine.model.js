@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 
-var sessionHumorModel = new mongoose.Schema({
+var sessionCineModel = new mongoose.Schema({
 
     userId: String,
     questionsArray = String[],
