@@ -2,16 +2,17 @@
 var mongoose = require('mongoose');
 
 
-var profilePsyModel = new mongoose.Schema({
+var profileCineModel = new mongoose.Schema({
     userId: String[],
     selfEsteem: Number,
     serenity: Number,
     confiance: Number,
     assurance: Number,
-    risque: Number
+    risque: Number,
 
     createdAt: Date
+    sessionCineDoneId: String[]
     
 });
 
-module.exports = mongoose.model('ProfilePsy',profilePsyModel)
+module.exports = mongoose.model('ProfileCine',profileCineModel)

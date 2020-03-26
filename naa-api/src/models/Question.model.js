@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 
 var questionModel = new mongoose.Schema({
     
-    text: 
-    answers : []
+    content:  String
+    answers: []  ///DECLARER SOUS ARRAY
 
 });
 

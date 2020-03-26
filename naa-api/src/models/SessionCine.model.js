@@ -6,6 +6,11 @@ var sessionCineModel = new mongoose.Schema({
 
     userId: String,
     questionsArray = String[],
+    selfEsteemScore: Number,
+    serenityScore: Number,
+    confianceScore: Number,
+    assuranceScore: Number,
+    risqueScore: Number,
     createdAt: Date
 
 });
