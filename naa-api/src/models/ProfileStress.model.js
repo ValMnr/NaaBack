@@ -13,9 +13,6 @@ var profileStressModel = new mongoose.Schema({
 
     emotionalConseq: String[],
     physicalConseq: String[],
-
-    sessionStressDoneId: String[]
-
     createdAt: Date
 
     

@@ -9,7 +9,7 @@ var questionModel = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('SessionCine', sessionCineModel)
+module.exports = mongoose.model('Question', sessionCineModel)
 
 
 

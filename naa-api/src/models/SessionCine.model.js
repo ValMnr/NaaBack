@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var sessionCineModel = new mongoose.Schema({
 
     userId: String,
-    questionsArray = String[],
+    questionsArray: String[],
     selfEsteemScore: Number,
     serenityScore: Number,
     confianceScore: Number,

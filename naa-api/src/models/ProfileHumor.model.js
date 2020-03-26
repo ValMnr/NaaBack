@@ -6,8 +6,9 @@ var profileHumorModel = new mongoose.Schema({
     userId: String,
     createdAt: Date,
     level: Number,
-    causes: String[]
-    
+    causes: String[],
+    sessionHumotDoneId: String[]
+
     
 });
 

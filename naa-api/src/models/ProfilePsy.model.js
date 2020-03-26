@@ -9,8 +9,7 @@ var profileCineModel = new mongoose.Schema({
     confiance: Number,
     assurance: Number,
     risque: Number,
-
-    createdAt: Date
+    createdAt: Date,
     sessionCineDoneId: String[]
     
 });
