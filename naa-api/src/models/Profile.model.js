@@ -12,6 +12,7 @@ var profileModel = new mongoose.Schema({
     humorProfilesId: String[]
     
     
+    
 });
 
 module.exports = mongoose.model('Profile',profileModel)
