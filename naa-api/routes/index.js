@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-var ProfileController = require('../controllers/Profile.controller');
-var ProfilePsyController = require('../controllers/ProfilePsy.controller');
-var ProfileStressController = require('../controllers/ProfileStress.controller');
-var SessionHumorController = require('../controllers/SessionHumor.controller');
-var ProfileHumorController = require('../controllers/ProfileHumor.controller');
-var UserController = require('../controllers/User.controller');
+var ProfileController = require('../src/controller/Profile.controller');
+var ProfilePsyController = require('../src/controller/ProfilePsy.controller');
+var ProfileStressController = require('../src/controller/ProfileStress.controller');
+var SessionHumorController = require('../src/controller/SessionHumor.controller');
+var ProfileHumorController = require('../src/controller/ProfileHumor.controller');
+var UserController = require('../src/controller/User.controller');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
