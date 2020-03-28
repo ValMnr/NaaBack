@@ -1,8 +1,8 @@
-var Profile = require('../models/Profile.model');
+var ProfileModel = require('../models/Profile.model');
 
 class Profile {
     
     
 }
 
-module.exports = new Profile; 
+module.exports =  Profile;  

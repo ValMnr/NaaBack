@@ -9,7 +9,6 @@ var userModel = new mongoose.Schema({
     password: String,
     pseudo: String,
     createdAt: Date
-
 });
 
 module.exports = mongoose.model('User', userModel)

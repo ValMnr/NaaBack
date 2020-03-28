@@ -1,4 +1,4 @@
-var SessionCine = require('../models/SessionCine.model');
+var SessionCineModel = require('../models/SessionCine.model');
 
 class SessionCine {
     

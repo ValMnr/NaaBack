@@ -1,12 +1,21 @@
 var express = require('express');
-var router = express.Router();
+const router = express.Router();
 
+<<<<<<< HEAD
 var ProfileController = require('../controllers/Profile.controller');
 var ProfilePsyController = require('../controllers/ProfilePsy.controller');
 var ProfileStressController = require('../controllers/ProfileStress.controller');
 var SessionHumorController = require('../controllers/SessionHumor.controller');
 var ProfileHumorController = require('../controllers/ProfileHumor.controller');
 var UserController = require('../controllers/User.controller.js');
+=======
+var ProfileController = require('../src/controller/Profile.controller');
+var ProfilePsyController = require('../src/controller/ProfilePsy.controller');
+var ProfileStressController = require('../src/controller/ProfileStress.controller');
+var SessionHumorController = require('../src/controller/SessionHumor.controller');
+var ProfileHumorController = require('../src/controller/ProfileHumor.controller');
+var UserController = require('../src/controller/User.controller.js');
+>>>>>>> 8a58bf3373020d574f5445c87c3ffd3b81c69d5b
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,13 +23,19 @@ router.get('/', function(req, res, next) {
 });
 
 //User
-router.post('/api/user',UserController.createUser);
+router.post('/api/user',()=>UserController.createUser);
+
+/*
 
 //profile
 router.post('/api/profile',ProfileController.createProfile); //crée un profil
 router.update( '/api/profile/profilestress', ProfileController.addProfileStress); //ajoutera un Id dans l'ArrayList ProfilStress
 router.update( '/api/profile/profilepsy', ProfileController.addProfilePsy); // ajoutera un ID dans l'Arraylist ProfilPsy 
 router.update ('/api/profile/profilehumor',ProfileController.addProfileHumor); //ajoutera un ID dans l'Arraylist ProfilHumor
+<<<<<<< HEAD
+=======
+//router.update (...)
+>>>>>>> 8a58bf3373020d574f5445c87c3ffd3b81c69d5b
 router.get('/api/profile', ProfileController.getProfile); //récupère le profil
 
 //profileHumor
@@ -44,6 +59,6 @@ router.get('/api/sessionhumor', SessionHumorController.getSessionHumor); //récu
 router.get('/api/profil', SessionCineCrontroller.getSessionCine); //récupère les sessions
 
 
-
+*/
 
 module.exports = router;

@@ -10,9 +10,6 @@ var profileModel = new mongoose.Schema({
     stressProfilesId: [String],
     psyProfilesId: [String],
     humorProfilesId: [String]
-    
-    
-    
 });
 
 module.exports = mongoose.model('Profile',profileModel)

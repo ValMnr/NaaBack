@@ -1,4 +1,4 @@
-var ProfileStress = require('../models/ProfileStress.model');
+var ProfileStressModel = require('../models/ProfileStress.model');
 
 class ProfileStress {
     
