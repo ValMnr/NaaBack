@@ -7,14 +7,14 @@ var profileStressModel = new mongoose.Schema({
     professionalSituation: String,
     children: Number,
 
-    stressFactors: String[],
-    stressEscape: String[],
-    stressRelief: String[],
+    stressFactors: [String],
+    stressEscape: [String],
+    stressRelief: [String],
 
-    emotionalConseq: String[],
-    physicalConseq: String[],
+    emotionalConseq: [String],
+    physicalConseq: [String],
 
-    sessionStressDoneId: String[]
+    sessionStressDoneId: [String]
 
     createdAt: Date
 

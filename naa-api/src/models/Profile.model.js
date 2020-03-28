@@ -7,9 +7,9 @@ var profileModel = new mongoose.Schema({
     sexe: String,
     age: Number,
     createdAt: Date,
-    stressProfilesId: String[],
-    psyProfilesId: String[],
-    humorProfilesId: String[]
+    stressProfilesId: [String],
+    psyProfilesId: [String],
+    humorProfilesId: [String]
     
     
     
