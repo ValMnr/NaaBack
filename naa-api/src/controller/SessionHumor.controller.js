@@ -1,4 +1,4 @@
-var SessionHumor = require('../models/SessionHumor.model');
+var SessionHumorModel = require('../models/SessionHumor.model');
 
 class SessionHumor {
     

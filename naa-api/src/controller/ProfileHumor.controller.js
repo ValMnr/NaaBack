@@ -1,4 +1,4 @@
-var ProfileHumor = require('../models/ProfileHumor.model');
+var ProfileHumorModel = require('../models/ProfileHumor.model');
 
 class ProfileHumor {
     

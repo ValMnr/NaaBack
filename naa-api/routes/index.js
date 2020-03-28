@@ -1,12 +1,12 @@
 var express = require('express');
-var router = express.Router();
+const router = express.Router();
 
 var ProfileController = require('../src/controller/Profile.controller');
 var ProfilePsyController = require('../src/controller/ProfilePsy.controller');
 var ProfileStressController = require('../src/controller/ProfileStress.controller');
 var SessionHumorController = require('../src/controller/SessionHumor.controller');
 var ProfileHumorController = require('../src/controller/ProfileHumor.controller');
-var UserController = require('../src/controller/User.controller');
+var UserController = require('../src/controller/User.controller.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,14 +14,16 @@ router.get('/', function(req, res, next) {
 });
 
 //User
-router.post('/api/user',UserController.createUser);
+router.post('/api/user',()=>UserController.createUser);
+
+/*
 
 //profile
 router.post('/api/profile',ProfileController.createProfile); //crée un profil
 router.update( '/api/profile/profilestress', ProfileController.addProfileStress); //ajoutera un Id dans l'ArrayList ProfilStress
 router.update( '/api/profile/profilepsy', ProfileController.addProfilePsy); // ajoutera un ID dans l'Arraylist ProfilPsy 
 router.update ('/api/profile/profilehumor',ProfileController.addProfileHumor); //ajoutera un ID dans l'Arraylist ProfilHumor
-router.update (...)
+//router.update (...)
 router.get('/api/profile', ProfileController.getProfile); //récupère le profil
 
 //profileHumor
@@ -45,6 +47,6 @@ router.get('/api/sessionhumor', SessionHumorController.getSessionHumor); //récu
 router.get('/api/profil', SessionCineCrontroller.getSessionCine); //récupère les sessions
 
 
-
+*/
 
 module.exports = router;

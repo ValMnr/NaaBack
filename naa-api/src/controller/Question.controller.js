@@ -1,4 +1,4 @@
-var Question = require('../models/Question.model');
+var QuestionModel = require('../models/Question.model');
 
 class Question {
     

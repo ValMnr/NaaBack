@@ -1,4 +1,4 @@
-var ProfilePsy = require('../models/ProfilePsy.model');
+var ProfilePsyModel = require('../models/ProfilePsy.model');
 
 class ProfilePsy {
     

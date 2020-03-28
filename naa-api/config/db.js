@@ -1,7 +1,7 @@
 
 var db = {
-    'database': process.env.NODE_ENV == 'test' ? 'mongodb://localhost/DashboardProject' : 'mongodb://localhost/DashboardProject'
+    'database': process.env.NODE_ENV == 'test' ? 'mongodb://localhost/NaaAPI' : 'mongodb://localhost/NaaAPI'
     };
   
-    module.exports = db;
+module.exports = db;
   
