@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 });
 
 //User
-router.post('/api/user',()=>UserController.createUser);
+router.post('/api/user',UserController.createUser);
 
 /*
 
