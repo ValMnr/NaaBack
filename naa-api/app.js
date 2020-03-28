@@ -3,11 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var mongoose = require ("mongoose");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+//mongoose setup
+mongoose.Promise = Promise;
+mongoose.connect(config.database, { useNewUrlParser: true });
+mongoose.connection.on('error', () => {
+    throw new Error(`unable to connect to database: ${mongoUri}`);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
