@@ -25,11 +25,13 @@ router.update( '/api/profile/profilestress', ProfileController.addProfileStress)
 router.update( '/api/profile/profilepsy', ProfileController.addProfilePsy); // ajoutera un ID dans l'Arraylist ProfilPsy 
 router.update ('/api/profile/profilehumor',ProfileController.addProfileHumor); //ajoutera un ID dans l'Arraylist ProfilHumor
 router.get('/api/profile', ProfileController.getProfile); //récupère le profil
-
+*/
 //profileHumor AL
 router.post('/api/profilehumor',ProfileHumorController.createProfileHumor); //crée un profilhumor
-router.update ()//ajouter l'id de la session humeur dans le profil humeur
 router.get('/api/profilehumor', ProfileHumorController.getProfileHumor); //récupère les 7 derniers profils humor
+/*
+router.update ()//ajouter l'id de la session humeur dans le profil humeur
+
 
 //profilePsy VAL
 router.post('/api/profilepsy',ProfilePsyController.createProfilePsy); //crée un profil psy
