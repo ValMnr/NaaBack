@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 //User VAL
 router.post('/api/user/signup',UserController.createUser);
-router.get('/api/user/login',UserController.createUser);
+router.post('/api/user/login',UserController.authUser);
 
 /*
 
