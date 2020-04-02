@@ -1,7 +1,9 @@
 var SessionHumor = require('../models/SessionHumor.model');
+var QuestionsHumor = require('../models/QuestionsHumor.model');
+var AnswersHumor = require('../models/AnswersHumor.model');
 
-class SessionHumor {
-    createProfileHumor(req,res){
+class Humor {
+  /*  createProfileHumor(req,res){
         if (!req.body.userId || !req.body.level || !req.body.causes || !req.body.sessionHumorDoneId) {
             res.json({success: false, msg: 'Informations manquantes pour enregistrer le profil'});
 
@@ -54,11 +56,12 @@ class SessionHumor {
     }
 
     
-
+*/
 
     
 
     
 }
 
-module.exports = new SessionHumor; 
+
+module.exports = new Humor; 

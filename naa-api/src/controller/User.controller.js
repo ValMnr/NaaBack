@@ -1,8 +1,10 @@
 var User = require('../models/User.model');
 
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
- createUser = (req,res,next) =>{
+
+class UserController {
+ createUser(req,res,next){
     console.log("Post Request"+req.body.firstName)
      
     var user = new User ({
@@ -25,5 +27,23 @@ var mongoose = require('mongoose')
     
 }
 
+async getUser(req,res){
 
-module.exports = {createUser}  ; 
+    try {
+        var users = await User.find().lean().exec();
+        
+        return res.status(200).json(users);
+
+    }
+    catch (err) {
+        return res.json(err);
+    }
+
+     
+}
+
+
+  
+}
+
+module.exports = new UserController ; 

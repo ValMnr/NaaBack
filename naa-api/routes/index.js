@@ -1,56 +1,37 @@
 var express = require('express');
 const router = express.Router();
 
-var ProfileController = require('../src/controller/Profile.controller');
-var ProfilePsyController = require('../src/controller/ProfilePsy.controller');
-var ProfileStressController = require('../src/controller/ProfileStress.controller');
-var SessionHumorController = require('../src/controller/SessionHumor.controller');
-var ProfileHumorController = require('../src/controller/ProfileHumor.controller');
 var UserController = require('../src/controller/User.controller');
+var ProfileController = require('../src/controller/Profile.controller');
+var CINEController = require('../src/controller/CINE.controller');
+var HumorController = require('../src/controller/Humor.controller');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
-//User VAL
+
+//User-Profile VAL
 router.post('/api/user/signup',UserController.createUser);
-router.get('/api/user/login',UserController.createUser);
-
+router.get('/api/user', UserController.getUser );
 /*
-
-//profile
 router.post('/api/profile',ProfileController.createProfile); //crée un profil
-router.update( '/api/profile/profilestress', ProfileController.addProfileStress); //ajoutera un Id dans l'ArrayList ProfilStress
-router.update( '/api/profile/profilepsy', ProfileController.addProfilePsy); // ajoutera un ID dans l'Arraylist ProfilPsy 
-router.update ('/api/profile/profilehumor',ProfileController.addProfileHumor); //ajoutera un ID dans l'Arraylist ProfilHumor
-router.get('/api/profile', ProfileController.getProfile); //récupère le profil
-*/
-//profileHumor AL
-router.post('/api/profilehumor',ProfileHumorController.createProfileHumor); //crée un profilhumor
-router.get('/api/profilehumor', ProfileHumorController.getProfileHumor); //récupère les 7 derniers profils humor
+
+
 /*
-router.update ()//ajouter l'id de la session humeur dans le profil humeur
-
-
-//profilePsy VAL
-router.post('/api/profilepsy',ProfilePsyController.createProfilePsy); //crée un profil psy
-router.update('/api/profilepsy',ProfilePsyController.updateScores); //met à jour les scores du profil psy
-router.get('/api/profilepsy', ProfilePsyController.getProfilePsy); //récupère un profil psy
-
-//ProfileStress
-router.post('/api/profilestress',ProfileStressController.createProfileStress); //crée un profil stress du user
-router.get('/api/profilestress', ProfileStressController.getProfileStress); //récupère le profil stress du user
-
-//SessionHumor AL
-router.get('/api/sessionhumor', SessionHumorController.getSessionHumor); //récupère une session humor
-
-//SessionCine VAL
-router.get('/api/profil', SessionCineCrontroller.getSessionCine); //récupère les sessions
-
-//Question VAL
-router.get('/api/question', ); //récupère les questions
-
+//Humor 
+router.get('/api/humor') // à voir à voir à voir
+router.post('/api/humor',SessionHumorController.createProfileHumor); //crée une session humor
+router.get('/api/humor', SessionHumorController.getProfileHumor); //récupère les 7 dernières session humor
 */
+
+//CINE 
+router.post('/api/CINE', CINEController.writeallparcours);
+router.post('/api/CINE/questions', CINEController.writeallquestions);
+/*
+router.get('/api/CINE', CINEController.getquestionnaire); //récupère les questions
+router.get('/api/CINE', CINECrontroller.getprogressbars); //récupère les barres de progression
+router.post('/api/CINE', CINECrontroller.parcoursdone); //post ou put le parcours terminer
+router.post('/api/CINE', CINEController.getspiderdiagram); //récupère les valeurs du diagramme arraignée
+*/
+
+
 
 module.exports = router;
