@@ -25,10 +25,11 @@ router.get('/api/humor', SessionHumorController.getProfileHumor); //récupère l
 //CINE 
 router.post('/api/CINE', CINEController.writeallparcours);
 router.post('/api/CINE/questions', CINEController.writeallquestions);
+router.get('/api/CINE', CINEController.getunparcours); //récupère les questions
+router.post('/api/CINE/putsession', CINEController.parcoursdone); //post ou put le parcours terminé dans Session
 /*
-router.get('/api/CINE', CINEController.getquestionnaire); //récupère les questions
 router.get('/api/CINE', CINECrontroller.getprogressbars); //récupère les barres de progression
-router.post('/api/CINE', CINECrontroller.parcoursdone); //post ou put le parcours terminer
+
 router.post('/api/CINE', CINEController.getspiderdiagram); //récupère les valeurs du diagramme arraignée
 */
 

@@ -5,12 +5,8 @@ var mongoose = require('mongoose');
 var SessionCINEModel = new mongoose.Schema({
 
     userId: String,
-    questionsArray: [String],
-    selfEsteemScore: Number,
-    serenityScore: Number,
-    confianceScore: Number,
-    assuranceScore: Number,
-    risqueScore: Number,
+    parcoursId: String,
+    score: Number,
     createdAt: Date
 });
 
