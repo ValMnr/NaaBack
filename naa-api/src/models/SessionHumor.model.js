@@ -2,15 +2,12 @@
 var mongoose = require('mongoose');
 
 
-var sessionHumorModel = new mongoose.Schema({
-
+var SessionHumorModel = new mongoose.Schema({
     userId: String,
-    questionsArray : [String],
-    createdAt: Date
-
+    questionId: String,
+    answerId:String,
+    createdAt: Date,
+    
 });
 
-module.exports = mongoose.model('SessionHumor', sessionHumorModel)
-
-
-
+module.exports = mongoose.model('SessionHumor',SessionHumorModel)

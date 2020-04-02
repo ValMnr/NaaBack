@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 
-var sessionCineModel = new mongoose.Schema({
+var SessionCINEModel = new mongoose.Schema({
 
     userId: String,
     questionsArray: [String],
@@ -14,7 +14,7 @@ var sessionCineModel = new mongoose.Schema({
     createdAt: Date
 });
 
-module.exports = mongoose.model('SessionCine', sessionCineModel)
+module.exports = mongoose.model('SessionCINE', SessionCINEModel)
 
 
 
