@@ -1,6 +1,14 @@
 var QuestionsCINE = require('../models/QuestionsCINE.model');
 var ParcoursCINE = require('../models/ParcoursCINE.model');
 var SessionCINE = require('../models/SessionCINE.model');
+var mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
+
+var TotalC = 15; //nombre de question
+var TotalI = 15;
+var TotalN = 10;
+var TotalE = 11;
+
 
 async function asyncForEach(array, callback) {
     for (let index = 0; index < array.length; index++) {
@@ -78,67 +86,177 @@ class CINEController {
         ParcoursCINE.find({ type: req.body.type, rang: req.body.rang })
             .then(parcours => {
 
-                QuestionsCINE.find({ parcoursId: parcours[0]._id }, async (err, questions) => {
+                  SessionCINE.count({userId: req.body.userId, parcoursId: parcours[0]._id}, function(err,count){
+                  
+                      if (count>0)
+                      {
+                          console.log("existe déjà");
+
+                          QuestionsCINE.find({ parcoursId: parcours[0]._id }, async (err, questions) => {
+                            if (err) {
+                                return res.json(err)
+                            }
+                            else {
+                                var i = 0
+                                await asyncForEach(questions, async (question) => {
+                                    if (req.body.response[i] === question.correct_answer) { cpt++; }
+                                    i++
+                                });
+                               
+                                let session = await SessionCINE.findOneAndUpdate({userId: req.body.userId, parcoursId: parcours[0]._id}, { score: cpt });                               
+                                if (err) {
+                                    return res.json(err)
+                                }
+                                else {
+                                   session.save();
+                               
+                                return res.status(200).json(session);
+                                }
+                                
+            
+                              
+        
+                            }
+                        });
+                      }
+                      else {
+
+                        console.log("n'existe pas");
+                        QuestionsCINE.find({ parcoursId: parcours[0]._id }, async (err, questions) => {
+                            if (err) {
+                                return res.json(err)
+                            }
+                            else {
+                                var i = 0
+                                await asyncForEach(questions, async (question) => {
+                                    if (req.body.response[i] === question.correct_answer) { cpt++; }
+                                    i++
+                                });
+        
+                    
+        
+                                var session = new SessionCINE({
+                                    parcoursId: parcours[0]._id,
+                                    userId: req.body.userId,
+                                    score: cpt,
+                                    createdAt: Date.now()
+        
+                                });
+        
+                                session.save((err, session) => {
+                                    if (err) {
+                                        return res.status(500).send(err)
+                                    }
+                                    else {
+                                        console.log("Session saved : " + session)
+                                        return res.status(200).json(session);
+                                    }
+        
+        
+                                });
+        
+                            }
+                        });
+
+                      }
+                  });
+               
+    
+                });
+
+                
+        
+    }
+
+    async getprogressbars(req, res) {
+        var score= [];
+       
+        SessionCINE.find({ userId:req.body.userId },async (err, sessions) => {
+            if (err) {
+                return res.json(err)
+            }
+            else {
+                let ScoreC =0;
+                let ScoreI =0;
+                let ScoreN =0;
+                let ScoreE =0;
+
+                await asyncForEach(sessions, async (session) => {
+                   // console.log(session)
+                    let parcours = await ParcoursCINE.find({ _id: session.parcoursId }).exec();
+               
+                        //console.log(parcours)
+                        if (err) {
+                            return res.json(err)
+                        }
+                        else {
+                            if (parcours[0].type === "C") 
+                            { ScoreC += session.score; }    
+                            if (parcours[0].type === "I") 
+                            { ScoreI += session.score; }     
+                            if (parcours[0].type === "N") 
+                            { ScoreN += session.score; }     
+                            if (parcours[0].type === "E") 
+                            { ScoreE += session.score; }      
+                        }   
+                    });
+                  
+                    score.push(ScoreC);
+                    score.push(ScoreI);
+                    score.push(ScoreN);
+                    score.push(ScoreE);
+            
+                res.json(score);
+        }     
+    });
+}
+
+getspiderdiagram(req,res) {
+    var score = [];
+    SessionCINE.find({ userId:req.body.userId },async (err, sessions) => {
+        if (err) {
+            return res.json(err)
+        }
+        else {
+            let selfEsteem =0;
+            let serenity =0;
+            let confiance =0;
+            let assurance =0;
+            let risk =0;
+
+            await asyncForEach(sessions, async (session) => {           
+                let parcours = await ParcoursCINE.find({ _id: session.parcoursId }).exec();
                     if (err) {
                         return res.json(err)
                     }
                     else {
-                        var i = 0
-                        await asyncForEach(questions, async (question) => {
-                            if (req.body.response[i] === question.correct_answer) { cpt++; }
-                            i++
-                        });
-
-                        console.log(cpt)
-
-                        var session = new SessionCINE({
-                            parcoursId: parcours[0]._id,
-                            userId: req.body.userId,
-                            score: cpt,
-                            createdAt: Date.now()
-
-                        });
-
-                        session.save((err, session) => {
-                            if (err) {
-                                return res.status(500).send(err)
-                            }
-                            else {
-                                //console.log("Session saved : " + session)
-                                return res.status(200).json(session);
-                            }
-
-
-                        });
-
+                        QuestionsCINE.count({parcoursId: parcours[0]._id}, function(err,count){
+                  
+                            if (count>0)
+                            {
+                                
+                        selfEsteem += parcours[0].selfEsteem * session.score / count ;
+                        serenity += parcours [0].serenity  * session.score/ count;
+                        confiance += parcours[0].confiance  * session.score/ count;
+                        assurance += parcours[0].assurance  * session.score/count ;
+                        risk += parcours[0].risque  * session.score/ count; 
                     }
                 });
-            });
-    }
-
-    getprogressbars(req,res) {
-        var ScoreC = 0
-
-        SessionCINE.find({ userId: req.body.userId, rang: req.body.rang })
-        .then(sessions => {
-            console.log(sessions[0].pacoursId);
-            ParcoursCINE.find({ _id: sessions[0].parcoursId })
-                .then(parcours => {
-                    if (parcours.type === "C")
-                    {
-                        ScoreC += sessions[0].score;
-                    }
-                    return res.status(200).json(questions);
+            }
+                    
                 });
-        });
+              
+                score.push(selfEsteem);
+                score.push(serenity);
+                score.push(confiance);
+                score.push(assurance);
+                score.push(risk);
+        
+            res.json(score);
+    }     
+});
 
-    return res.status(200);
-
-    }
-
-
-
-
+}
 
 }
 
