@@ -1,7 +1,7 @@
 var User = require('../models/User.model');
 var bcrypt = require('bcrypt')
 
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
 createUser = (req, res, next) => {
     User.findOne({ email: req.body.email }, (err, result) => {
@@ -49,5 +49,23 @@ authUser = (req, res, next) => {
     });
 }
 
+async getUser(req,res){
+
+    try {
+        var users = await User.find().lean().exec();
+        
+        return res.status(200).json(users);
+
+    }
+    catch (err) {
+        return res.json(err);
+    }
+
+     
+}
+
+
+  
+}
 
 module.exports = { createUser, authUser }; 

@@ -2,14 +2,19 @@
 var mongoose = require('mongoose');
 
 
-var profileModel = new mongoose.Schema({
+var ProfileModel = new mongoose.Schema({
     userId: String,
     sexe: String,
     age: Number,
-    createdAt: Date,
-    stressProfilesId: [String],
-    psyProfilesId: [String],
-    humorProfilesId: [String]
+    socialSituation: String, //married, couple
+    professionalSituation: String,
+    children: Number,
+    stressFactors: [String],
+    stressEscape: [String],
+    stressRelief: [String],
+    emotionalConseq: [String],
+    physicalConseq: [String],
+    createdAt: Date
 });
 
-module.exports = mongoose.model('Profile',profileModel)
+module.exports = mongoose.model('Profile',ProfileModel)
