@@ -34,7 +34,6 @@ authUser = (req, res, next) => {
     console.log(req.body)
 
     crtUser = User.findOne({ email: req.body.email }, (err, result) => {
-        console.log("resr :", result.password)
         if (result == null) {
             console.log("couldn't find user")
             return res.status(500).json("email_not_exist")
@@ -48,24 +47,7 @@ authUser = (req, res, next) => {
         };
     });
 }
-
-async getUser(req,res){
-
-    try {
-        var users = await User.find().lean().exec();
-        
-        return res.status(200).json(users);
-
-    }
-    catch (err) {
-        return res.json(err);
-    }
-
-     
-}
-
-
   
-}
+
 
 module.exports = { createUser, authUser }; 
