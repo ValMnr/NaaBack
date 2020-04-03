@@ -7,11 +7,11 @@ var CINEController = require('../src/controller/CINE.controller');
 var HumorController = require('../src/controller/Humor.controller');
 
 
-
 //User-Profile VAL
 router.post('/api/user/signup',UserController.createUser);
-router.get('/api/user', UserController.getUser );
-/*
+router.post('/api/user/login',UserController.authUser);
+
+//*
 router.post('/api/profile',ProfileController.createProfile); //crée un profil
 
 
