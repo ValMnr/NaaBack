@@ -1,7 +1,7 @@
 var User = require('../models/User.model');
 var bcrypt = require('bcrypt')
 
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
 createUser = (req, res, next) => {
     User.findOne({ email: req.body.email }, (err, result) => {
@@ -34,7 +34,6 @@ authUser = (req, res, next) => {
     console.log(req.body)
 
     crtUser = User.findOne({ email: req.body.email }, (err, result) => {
-        console.log("resr :", result.password)
         if (result == null) {
             console.log("couldn't find user")
             return res.status(500).json("email_not_exist")
@@ -48,6 +47,7 @@ authUser = (req, res, next) => {
         };
     });
 }
+  
 
 
 module.exports = { createUser, authUser }; 

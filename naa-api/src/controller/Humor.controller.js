@@ -1,8 +1,9 @@
-var ProfileHumorModel = require('../models/ProfileHumor.model');
+var SessionHumor = require('../models/SessionHumor.model');
+var QuestionsHumor = require('../models/QuestionsHumor.model');
+var AnswersHumor = require('../models/AnswersHumor.model');
 
-
-class ProfileHumor {
-    createProfileHumor(req,res){
+class Humor {
+  /*  createProfileHumor(req,res){
         if (!req.body.userId || !req.body.level || !req.body.causes || !req.body.sessionHumorDoneId) {
             res.json({success: false, msg: 'Informations manquantes pour enregistrer le profil'});
 
@@ -32,13 +33,18 @@ class ProfileHumor {
         }
     }
 
-    //donne tous les profils humor d'un userId
+    //donne les profils humor d'un userId de la dernière semaine 
     async getProfileHumor(req, res) {
+        
+        var data =  {}
         if (!req.query.userId) {
             res.json({ success: false, msg: 'il faut l_id du user' });
         } else {
             try {
-                var humors = await ProfileHumorModel.find( { userId: req.query.userId }).lean().exec();
+                var humors = await ProfileHumorModel.find({userId: req.query.userId , createdAt: {
+                    $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000)
+                }}).lean().exec();
+                
                 return res.status(200).json(humors);
 
             }
@@ -49,8 +55,13 @@ class ProfileHumor {
         }
     }
 
+    
+*/
+
+    
 
     
 }
 
-module.exports = new ProfileHumor; 
+
+module.exports = new Humor; 
