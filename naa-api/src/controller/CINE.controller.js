@@ -69,12 +69,14 @@ class CINEController {
     }
 
     getunparcours(req, res) {
+        
         ParcoursCINE.find({ type: req.body.type, rang: req.body.rang })
             .then(parcours => {
-                console.log(parcours[0]._id);
+       
+                console.log(parcours[0].content);
                 QuestionsCINE.find({ parcoursId: parcours[0]._id })
                     .then(questions => {
-                        return res.status(200).json(questions);
+                        return res.status(200).json({content:parcours[0].content ,questions:questions});
                     });
             });
 
