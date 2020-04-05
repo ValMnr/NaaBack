@@ -3,14 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
-
+var cors = require('cors')
 var logger = require('morgan');
 var mongoose = require ("mongoose");
 var indexRouter = require('./routes/index.js');
 var config = require ('./config/db')
 
 var app = express();
-
+app.use(cors())
 //mongoose setup
 mongoose.Promise = Promise;
 mongoose.connect(config.database, { useNewUrlParser: true });
