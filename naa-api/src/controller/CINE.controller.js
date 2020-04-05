@@ -208,26 +208,24 @@ class CINEController {
         });
     }
 
-    getspiderdiagram(req, res) {
+    async getspiderdiagram(req, res) {
         var score = [];
-        SessionCINE.find({ userId: req.body.userId }, async (err, sessions) => {
+        await SessionCINE.find({ userId: req.body.userId }, async (err, sessions) => {
             if (err) {
                 return res.json(err)
             }
             else {
-                let selfEsteem = 0;
-                let serenity = 0;
-                let confiance = 0;
-                let assurance = 0;
-                let risk = 0;
+                var selfEsteem = 0;
+                var serenity = 0;
+                var confiance = 0;
+                var assurance = 0;
+                var risk = 0;
 
                 await asyncForEach(sessions, async (session) => {
                     let parcours = await ParcoursCINE.find({ _id: session.parcoursId }).exec();
-                    if (err) {
-                        return res.json(err)
-                    }
-                    else {
-                        QuestionsCINE.count({ parcoursId: parcours[0]._id }, function (err, count) {
+                    if (parcours) {
+
+                        await QuestionsCINE.count({ parcoursId: parcours[0]._id }, function (err, count) {
 
                             if (count > 0) {
 
@@ -237,7 +235,13 @@ class CINEController {
                                 assurance += parcours[0].assurance * session.score / count;
                                 risk += parcours[0].risque * session.score / count;
                             }
+                            
                         });
+                        
+                    }
+                    else {
+                        return res.json({err:"pas de parcours trouvé"});
+                        
                     }
 
                 });
@@ -248,7 +252,7 @@ class CINEController {
                 score.push(assurance);
                 score.push(risk);
 
-                res.json(score);
+                res.json({score:score});
             }
         });
 
