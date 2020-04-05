@@ -12,23 +12,28 @@ router.post('/api/user/signup',UserController.createUser);
 router.post('/api/user/login',UserController.authUser);
 
 //*
-router.post('/api/profile',ProfileController.createProfile); //crée un profil
+router.post('/api/createProfile',ProfileController.createProfile); //crée un profil
 
 
-/*
+
 //Humor 
-router.get('/api/humor') // à voir à voir à voir
-router.post('/api/humor',SessionHumorController.createProfileHumor); //crée une session humor
-router.get('/api/humor', SessionHumorController.getProfileHumor); //récupère les 7 dernières session humor
-*/
+
+router.post('/api/humor/session',SessionHumorController.createSessionHumor); //crée une session humor
+router.get('/api/humor/sessionLatest', SessionHumorController.getLatestSessionHumor); //récupère la dernière session humor
+router.get('/api/humor/sessionWeek', SessionHumorController.getWeekSessionHumor); //récupère les 7 dernières session humor
+router.post('/api/humor/answer/add', SessionHumorController.addAnswer); //Ajouter une reponse 
+
+//router.get('/api/humor') // à voir à voir à voir
+router.get('/api/humor/session',SessionHumorController.searchSessionHumor); //renvoie une session humor 
+router.post('/api/humor/advice', SessionHumorController.getAdvice); //Recupere un conseil selon les réponses précédentes
 
 //CINE 
 router.post('/api/CINE', CINEController.writeallparcours);
 router.post('/api/CINE/questions', CINEController.writeallquestions);
 router.get('/api/CINE', CINEController.getunparcours); //récupère les questions
 router.post('/api/CINE/putsession', CINEController.parcoursdone); //post ou put le parcours terminé dans Session
-router.get('/api/CINE/progressbars', CINEController.getprogressbars); //récupère les barres de progression C,I,N,E total en dur
-router.get('/api/CINE/spider', CINEController.getspiderdiagram); //récupère les valeurs du diagramme arraignée
+router.post('/api/CINE/progressbars', CINEController.getprogressbars); //récupère les barres de progression C,I,N,E total en dur
+router.post('/api/CINE/spider', CINEController.getspiderdiagram); //récupère les valeurs du diagramme arraignée
 
 
 
