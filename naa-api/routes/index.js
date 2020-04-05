@@ -18,14 +18,12 @@ router.post('/api/createProfile',ProfileController.createProfile); //crée un pr
 
 //Humor 
 
-router.post('/api/humor/session',SessionHumorController.createSessionHumor); //crée une session humor
-router.get('/api/humor/sessionLatest', SessionHumorController.getLatestSessionHumor); //récupère la dernière session humor
-router.get('/api/humor/sessionWeek', SessionHumorController.getWeekSessionHumor); //récupère les 7 dernières session humor
-router.post('/api/humor/answer/add', SessionHumorController.addAnswer); //Ajouter une reponse 
-
+router.post('/api/humor/session',HumorController.createSessionHumor); //crée une session humor
+router.get('/api/humor/sessionLatest', HumorController.getLatestSessionhumor); //récupère la dernière session humor
+router.get('/api/humor/sessionWeek', HumorController.getWeekSessionHumor); //récupère les 7 dernières session humor
+router.post('/api/humor/answer/add', HumorController.addAnswer); //Ajouter une reponse 
 //router.get('/api/humor') // à voir à voir à voir
-router.get('/api/humor/session',SessionHumorController.searchSessionHumor); //renvoie une session humor 
-router.post('/api/humor/advice', SessionHumorController.getAdvice); //Recupere un conseil selon les réponses précédentes
+router.post('/api/humor/advice', HumorController.getAdvice); //Recupere un conseil selon les réponses précédentes
 
 //CINE 
 router.post('/api/CINE', CINEController.writeallparcours);

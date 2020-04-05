@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 
 var SessionHumorModel = new mongoose.Schema({
     userId: String,
-    questionId: String,
-    answerId:String,
+    questionId: [String],
+    answerId: [String],
     createdAt: Date,
     
 });

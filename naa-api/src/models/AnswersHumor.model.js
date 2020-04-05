@@ -3,9 +3,10 @@ var mongoose = require('mongoose');
 
 
 var AnswersHumorModel = new mongoose.Schema({
-    
-    type_question: String,
-    content:  String
+    userId: String,
+    questionType: String,
+    content:  String,
+    score: Number
 
 });
 

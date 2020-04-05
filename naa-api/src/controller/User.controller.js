@@ -22,8 +22,8 @@ createUser = (req, res, next) => {
                     return res.status(500).send(err)
                 }
                 else {
-                    console.log("User saved : " + user)
-                    return res.status(200).json(user);
+                    console.log("User saved : " + user._id)
+                    return res.status(200).json(user._id);
                 }
             })
         }
@@ -39,7 +39,7 @@ authUser = (req, res, next) => {
             return res.status(500).json("email_not_exist")
         } else {
             if (bcrypt.compareSync(req.body.password, result.password)) {
-                return res.status(200).json("auth_ok")
+                return res.status(200).json(result)
 
             } else {
                 return res.status(500).json("incorrect_password")
