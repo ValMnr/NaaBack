@@ -1,0 +1,153 @@
+{
+  "settings": {
+    "languages": [
+      "fr"
+    ],
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp"
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "fr"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "fr": {
+        "settings": {
+          "locale": "fr",
+          "tag": "domain-manager-fr",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "trainByDomain": false,
+          "useStemDict": true
+        },
+        "stemDict": {
+          "sup": {
+            "intent": "advice.OK",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "advice.OK": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "Super",
+            "intent": "advice.OK"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "fr",
+              "tag": "nlu-fr",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "sup": 1
+            },
+            "intents": {
+              "advice.OK": 1
+            },
+            "intentFeatures": {
+              "advice.OK": [
+                "sup"
+              ]
+            },
+            "featuresToIntent": {
+              "sup": [
+                "advice.OK"
+              ]
+            },
+            "neuralNetwork": {
+              "features": [
+                "sup",
+                "nonefeature"
+              ],
+              "intents": [
+                "advice.OK",
+                "None"
+              ],
+              "perceptrons": [
+                [
+                  9.304596900939941,
+                  -3.056650161743164,
+                  3.1226744225221936
+                ],
+                [
+                  -3.0507571697235107,
+                  9.301389694213867,
+                  3.1268073740043056
+                ]
+              ],
+              "perceptronSettings": {
+                "locale": "fr",
+                "tag": "nlu-fr",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "fr",
+        "Super"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "fr": {
+        "advice.OK": [
+          {
+            "answer": "Prends sur toi ça va passer"
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}

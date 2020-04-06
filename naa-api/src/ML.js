@@ -1,35 +1,63 @@
 const { NlpManager } = require('node-nlp');
  
-const manager = new NlpManager({ languages: ['en'] });
-// Adds the utterances and intents for the NLP
-manager.addDocument('en', 'goodbye for now', 'greetings.bye');
-manager.addDocument('en', 'bye bye take care', 'greetings.bye');
-manager.addDocument('en', 'okay see you later', 'greetings.bye');
-manager.addDocument('en', 'bye for now', 'greetings.bye');
-manager.addDocument('en', 'i must go', 'greetings.bye');
-manager.addDocument('en', 'hello', 'greetings.hello');
-manager.addDocument('en', 'hi', 'greetings.hello');
-manager.addDocument('en', 'howdy', 'greetings.hello');
- 
+
+const managerAdvice = new NlpManager({ languages: ['fr'] });
+
+managerAdvice.addDocument('fr', 'Super', 'advice.OK');
+
+managerAdvice.addAnswer('fr','advice.OK','Prends sur toi ça va passer')
+
+const manager = new NlpManager({ languages: ['fr'] });
+// Adds the utterances and intfrts for the NLP
+
+manager.addDocument('fr', 'Super', 'type1.High');
+
+manager.addDocument('fr', 'Très bien', 'type1.High');
+manager.addDocument('fr', 'Bien', 'type1.Mid');
+manager.addDocument('fr', 'Moyen', 'type1.Mid');
+manager.addDocument('fr', 'Pas top', 'type1.Low');
+manager.addDocument('fr', 'Au fond du trou', 'type1.Low');
+
+
 // Train also the NLG
-manager.addAnswer('en', 'greetings.bye', 'Till next time');
-manager.addAnswer('en', 'greetings.bye', 'see you soon!');
-manager.addAnswer('en', 'greetings.hello', 'Hey there!');
-manager.addAnswer('en', 'greetings.hello', 'Greetings!');
+manager.addAnswer('fr', 'type1.High', '7');
+manager.addAnswer('fr', 'type1.Mid', '5');
+manager.addAnswer('fr', 'type1.Low', '3');
+
  
 // Train and save the model.
 (async() => {
     await manager.train();
     manager.save();
-    const response = await manager.process('en', 'I should go now');
-    console.log(response);
+    await managerAdvice.train();
+    managerAdvice.save();
 })();
-
-
-async function getScoreContent (type,content){
-
-
+/*
+*/
+function getIntent(response){
+    var score = parseInt(response.intent.split('.')[1])/10
+    console.log("score ! "+score)
+    return score
 }
 
 
-module.exports = {getScoreContent};
+async function getAdvice(data){
+    console.log("trying")
+    const response = await managerAdvice.process('fr', data);
+    console.log(response)
+    console.log(response.answer)
+    return response.answer
+}
+
+async function getScoreAnswer (type,content){
+
+    switch (type){
+        case 'type1':
+            const response = await manager.process('fr', content);
+            //console.log(response)
+            return getIntent(response)
+    }
+}
+
+
+module.exports = {getScoreAnswer, getAdvice};
