@@ -79,8 +79,6 @@ class CINEController {
                         return res.status(200).json({ content: parcours[0].content, questions: questions });
                     });
             });
-
-        return res.status(200);
     }
 
     async parcoursdone(req, res) {
