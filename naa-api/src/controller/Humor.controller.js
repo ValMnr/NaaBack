@@ -149,19 +149,21 @@ async function addAnswer(req, res) {
     }
 }
 
-//Recupere answersId , nlp sur les 3 réponses -> retourne un conseil
+//Recupere string answer , nlp sur les 3 réponses -> retourne un conseil
 async function getAdvice(req, res) {
+    console.log("********")
+    console.log(req.body)
+    console.log("********")
     if (!req.body) { return res.status(500).json("no body") }
     else {
         var crtAnswer = req.body.answerString
-        console.log("2" + nlpReq)
         var advice = await ML.getAdvice(crtAnswer)
         console.log("advice ::  " + advice)
         return res.status(200).json(advice)
 
     }
 }
-
+ 
 
 
 module.exports = { getQuestions, addQuestion, addAnswer, getLatestSessionhumor, createSessionHumor, getWeekSessionHumor, getAdvice }; 
