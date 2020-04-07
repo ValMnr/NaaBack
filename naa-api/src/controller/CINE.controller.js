@@ -13,6 +13,7 @@ var TotalE = 11;
 async function asyncForEach(array, callback) {
     for (let index = 0; index < array.length; index++) {
         await callback(array[index], index, array);
+        console.log("caca "+index)
     }
 }
 
@@ -98,23 +99,15 @@ class CINEController {
                             else {
                                 var i = 0
                                 await asyncForEach(questions, async (question) => {
-                                    if (req.body.response[i] === question.correct_answer) { cpt++; }
+                                    console.log(req.body.response[i], "egal", question.correct_answer)
+                                    if (req.body.response[i] == question.correct_answer) { cpt++; }
                                     i++
                                 });
 
                                 let session = await SessionCINE.findOneAndUpdate({ userId: req.body.userId, parcoursId: parcours[0]._id }, { score: cpt });
-                                if (err) {
-                                    return res.json(err)
-                                }
-                                else {
                                     session.save();
-
-                                    return res.status(200).json(session);
-                                }
-
-
-
-
+                                    console.log(cpt)
+                                    return res.status(200).json({cpt: cpt});
                             }
                         });
                     }
@@ -148,7 +141,7 @@ class CINEController {
                                     }
                                     else {
                                         console.log("Session saved : " + session)
-                                        return res.status(200).json(session);
+                                        return res.status(200).json({cpt:cpt});
                                     }
 
 
