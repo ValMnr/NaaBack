@@ -29,21 +29,21 @@ async function getQuestions(req, res) {
             }
         })
     }).then(() => {
-            QuestionsHumor.findOne({ type: "type3" }, (err, result) => {
-                if (err) {
-                    console.log(err)
-                    return res.status(500).json(err)
-                }
-                else {
-                    console.log(result)
-                    questionList.push(result)
-
-                }
-            }).then(() => {
-                return res.status(200).json(questionList)
+        QuestionsHumor.findOne({ type: "type3" }, (err, result) => {
+            if (err) {
+                console.log(err)
+                return res.status(500).json(err)
             }
-            )
-        })
+            else {
+                console.log(result)
+                questionList.push(result)
+
+            }
+        }).then(() => {
+            return res.status(200).json(questionList)
+        }
+        )
+    })
 }
 
 function addQuestion(req, res) {
@@ -65,10 +65,13 @@ function addQuestion(req, res) {
 
 //Creer une session humor (obvious)
 function createSessionHumor(req, res) {
+    console.log("in create session")
+    console.log(req.body)
     var crtSession = new SessionHumor({
-        userID: req.body.userId,
-        questionID: req.body.questions,
-        answersId: req.body.answersId,
+        userId: req.body.userId,
+        questionId: req.body.questions,
+        answerId: req.body.answersId,
+        score: req.body.score,
         createdAt: Date.now()
     })
 
@@ -78,6 +81,7 @@ function createSessionHumor(req, res) {
             return res.json({ success: false });
         }
         else {
+            console.log(session)
             return res.status(200).json(session);
         }
     })
@@ -89,7 +93,7 @@ async function getLatestSessionhumor(req, res) {
         res.status(500).json({ success: false, msg: 'il faut l_id du user' });
     } else {
         try {
-            var latestProfile = await ProfileHumorModel.find({ userId: req.query.userId }).sort({ createdAt: -1 }).limit(-1).lean().exec();
+            var latestProfile = await SessionHumor.find({ userId: req.query.userId }).sort({ createdAt: -1 }).limit(-1).lean().exec();
             return res.status(200).json(latestProfile);
         }
         catch (err) {
@@ -121,7 +125,7 @@ async function getWeekSessionHumor(req, res) {
 
 //Ajoute une reponse dans la BDD avec content, type, score -> Algo ML retourne score (0=bad /1=good) 
 async function addAnswer(req, res) {
-
+    console.log(req.body)
     if (!req.body.userId) {
         res.status(500).json("no userID");
     }
@@ -132,12 +136,15 @@ async function addAnswer(req, res) {
             score: await ML.getScoreAnswer(req.body.type, req.body.content)
         })
         crtAnswer.save((err, ans) => {
-            if (err) { return res.status(500).send(err) }
+            console.log(crtAnswer)
+            if (err) { return res.status(500).send("err here : "+err) }
             else {
                 console.log(" answer  : " + ans)
                 return res.status(200).json(ans);
-            }
+            } 
         })
+
+
 
     }
 }
