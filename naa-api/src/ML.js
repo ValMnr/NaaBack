@@ -3,9 +3,13 @@ const { NlpManager } = require('node-nlp');
 
 const managerAdvice = new NlpManager({ languages: ['fr'] });
 
-managerAdvice.addDocument('fr', 'Super', 'advice.OK');
+managerAdvice.addDocument('fr', 'Super ,Très bien ,Pas de Travail', 'advice.OK');
+managerAdvice.addDocument('fr', 'Nul, Pas top , Examens', 'adivce.BAD');
+managerAdvice.addDocument('fr', 'Bof, Pas top , Travail', 'adivce.BAD');
 
-managerAdvice.addAnswer('fr', 'advice.OK', 'Prends sur toi ça va passer')
+
+managerAdvice.addAnswer('fr', 'advice.OK', 'Continues comme ça')
+managerAdvice.addAnswer('fr', 'advice.BAD', 'Tout va aller mieux bientot, on va travailler ensemble')
 
 const manager = new NlpManager({ languages: ['fr'] });
 // Adds the utterances and intfrts for the NLP
