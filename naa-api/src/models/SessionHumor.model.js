@@ -6,7 +6,9 @@ var SessionHumorModel = new mongoose.Schema({
     userId: String,
     questionId: [String],
     answerId: [String],
-    createdAt: Date,
+    score: Number,
+    createdAt: Date
+
     
 });
 
