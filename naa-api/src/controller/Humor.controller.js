@@ -137,11 +137,11 @@ async function addAnswer(req, res) {
         })
         crtAnswer.save((err, ans) => {
             console.log(crtAnswer)
-            if (err) { return res.status(500).send("err here : "+err) }
+            if (err) { return res.status(500).send("err here : " + err) }
             else {
                 console.log(" answer  : " + ans)
                 return res.status(200).json(ans);
-            } 
+            }
         })
 
 
@@ -151,20 +151,15 @@ async function addAnswer(req, res) {
 
 //Recupere answersId , nlp sur les 3 réponses -> retourne un conseil
 async function getAdvice(req, res) {
-    var nlpReq = ""
-    var ansDone = 0
-    var crtAnswers = req.body.answers
-    crtAnswers.forEach((element) => {
-        nlpReq += element.content
-        ansDone += 1
-        if (ansDone === req.body.answers.length) {
-            console.log(nlpReq)
-        }
-    })
-    console.log("2" + nlpReq)
-    var advice = await ML.getAdvice(nlpReq)
-    console.log("advice ::  " + advice)
-    return res.status(200).json(advice)
+    if (!req.body) { return res.status(500).json("no body") }
+    else {
+        var crtAnswer = req.body.answerString
+        console.log("2" + nlpReq)
+        var advice = await ML.getAdvice(crtAnswer)
+        console.log("advice ::  " + advice)
+        return res.status(200).json(advice)
+
+    }
 }
 
 
