@@ -8,8 +8,8 @@ managerAdvice.addDocument('fr', 'Nul, Pas top , Examens', 'advice.BAD');
 managerAdvice.addDocument('fr', 'Bof, Pas top , Travail', 'advice.BAD');
 
 
-managerAdvice.addAnswer('fr', 'advice.OK', 'Continues comme ça')
-managerAdvice.addAnswer('fr', 'advice.BAD', 'Tout va aller mieux bientot, on va travailler ensemble')
+managerAdvice.addAnswer('fr', 'advice.OK', 'Continue comme ça !')
+managerAdvice.addAnswer('fr', 'advice.BAD', 'Tout va aller mieux bientot, on va travailler ensemble !')
 
 const manager = new NlpManager({ languages: ['fr'] });
 // Adds the utterances and intfrts for the NLP
@@ -42,7 +42,8 @@ function getIntent(response) {
     console.log(response)
     var score
     if (response.intent === undefined) {
-        score = 0.5
+        score = (Math.random() * (0.9 ) + 0.1).toFixed(2)
+
     } else {
         var score = parseFloat(response.intent.split('.')[1]) / 10
         console.log("score ! " + score)
